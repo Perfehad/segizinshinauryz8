@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="kk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>8 Наурыз</title>
+  <style>
+    :root{
+      --bg:#0b0b12;
+      --card:#131326;
+      --text:#f4f4ff;
+      --muted:#b9b9d6;
+      --accent:#ff4d7d;
+      --accent2:#7c5cff;
+      --shadow: 0 20px 60px rgba(0,0,0,.55);
+      --radius: 22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 20% 15%, rgba(255,77,125,.25), transparent 60%),
+        radial-gradient(700px 420px at 85% 20%, rgba(124,92,255,.22), transparent 60%),
+        radial-gradient(800px 520px at 55% 90%, rgba(255,255,255,.06), transparent 60%),
+        var(--bg);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+
+    .wrap{
+      width:min(980px, 100%);
+      display:grid;
+      gap:18px;
+    }
+
+    .panel{
+      background: rgba(19,19,38,.82);
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .hero{
+      padding:28px 26px;
+      display:grid;
+      place-items:center;
+      text-align:center;
+    }
+
+    .big8{
+      font-size: clamp(92px, 16vw, 190px);
+      line-height: .9;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip:text;
+      color: transparent;
+      text-shadow: 0 12px 60px rgba(255,77,125,.18);
+      margin: 0;
+    }
+
+    .subtitle{
+      margin: 10px 0 18px;
+      font-size: clamp(22px, 4.2vw, 38px);
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .hint{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .btn{
+      appearance:none;
+      border:0;
+      cursor:pointer;
+      padding: 14px 22px;
+      border-radius: 14px;
+      font-weight: 800;
+      color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 14px 40px rgba(255,77,125,.18);
+      transition: transform .12s ease, filter .12s ease;
+    }
+    .btn:hover{ transform: translateY(-2px); filter:saturate(1.1); }
+    .btn:active{ transform: translateY(0px); }
+
+    /* Book section */
+    .bookSection{
+      display:none;
+      padding:22px;
+    }
+    .bookGrid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:16px;
+    }
+    @media (min-width: 820px){
+      .bookGrid{
+        grid-template-columns: 360px 1fr;
+        align-items: stretch;
+      }
+    }
+
+    .book{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+    }
+
+    .cover{
+      border-radius: 18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 18px 50px rgba(0,0,0,.45);
+      position:relative;
+      min-height: 320px;
+    }
+    .cover img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+      filter: contrast(1.05) saturate(1.05);
+    }
+    .coverBadge{
+      position:absolute;
+      left:14px;
+      bottom:14px;
+      padding:10px 12px;
+      border-radius: 14px;
+      background: rgba(0,0,0,.45);
+      border: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(8px);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .pages{
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.10);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .pages:before{
+      content:"";
+      position:absolute;
+      top:0; left:0; right:0; height:12px;
+      background: linear-gradient(90deg, rgba(255,77,125,.25), rgba(124,92,255,.25));
+      opacity:.85;
+    }
+    .pageTitle{
+      margin: 10px 0 10px;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+    .pageText{
+      margin: 0;
+      color: rgba(244,244,255,.92);
+      line-height: 1.65;
+      font-size: 15.5px;
+      white-space: pre-wrap;
+    }
+
+    .meta{
+      margin-top: 14px;
+      display:flex;
+      gap:10px;
+      flex-wrap: wrap;
+      align-items:center;
+    }
+    .chip{
+      padding:10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .chip b{ color: white; }
+    .muted{ color: var(--muted); font-weight: 600; }
+
+    .backRow{
+      display:flex;
+      justify-content: flex-end;
+      margin-top: 16px;
+    }
+    .btnSecondary{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      padding: 11px 16px;
+      border-radius: 14px;
+      cursor:pointer;
+      font-weight: 800;
+      transition: transform .12s ease, background .12s ease;
+    }
+    .btnSecondary:hover{ transform: translateY(-1px); background: rgba(255,255,255,.08); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- HERO -->
+    <section class="panel hero" id="hero">
+      <h1 class="big8">8</h1>
+      <div class="subtitle">Наурыз</div>
+      <p class="hint">Батырманы бассаңыз — кітап ашылады (обложка + мәтін + дата + кері санақ).</p>
+      <button class="btn" id="nextBtn">Келесі</button>
+    </section>
+
+    <!-- BOOK -->
+    <section class="panel bookSection" id="bookSection">
+      <div class="bookGrid">
+        <div class="book">
+          <div class="cover">
+            <img id="coverImg" alt="Кітап обложкасы" />
+            <div class="coverBadge">8 Наурыз • Арнау</div>
+          </div>
+        </div>
+
+        <div class="pages">
+          <div class="pageTitle" id="pageTitle">Жүректен шыққан тілек</div>
+          <p class="pageText" id="pageText"></p>
+
+          <div class="meta">
+            <div class="chip">📅 Дата: <b id="targetDateText">—</b></div>
+            <div class="chip">⏳ Кері санақ: <b id="countdownText">—</b></div>
+            <div class="chip muted" id="tzText">Уақыт белдеуі: —</div>
+          </div>
+
+          <div class="backRow">
+            <button class="btnSecondary" id="backBtn">Кері</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // ===== Өзгертуге болатын баптаулар =====
+    const COVER_IMAGE_URL = "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=900&q=80";
+    const BOOK_TITLE = "Жүректен шыққан тілек";
+    const BOOK_TEXT =
+`Қымбатты арулар!
+Бүгінгі 8 Наурыз мерекесі құтты болсын! 🌸
+
+Көктеммен бірге үйіңізге қуаныш, жүрегіңізге жылу,
+өміріңізге береке мен бақыт келсін.
+Әр күніңіз күлімдеп өтсін, армандарыңыз орындалсын!`;
+
+    // Кері санақ қай күнге дейін?
+    // Әдепкі: алдағы ең жақын 8 наурыз (келесі 8 March).
+    // Қаласаңыз нақты дата қойыңыз: new Date("2026-03-08T00:00:00+05:00")
+    function getNextMarch8(now = new Date()){
+      const year = now.getFullYear();
+      // local time
+      let target = new Date(year, 2, 8, 0, 0, 0, 0); // March = 2
+      if (now.getTime() > target.getTime()) {
+        target = new Date(year + 1, 2, 8, 0, 0, 0, 0);
+      }
+      return target;
+    }
+
+    // ===== Логика =====
+    const hero = document.getElementById("hero");
+    const bookSection = document.getElementById("bookSection");
+    const nextBtn = document.getElementById("nextBtn");
+    const backBtn = document.getElementById("backBtn");
+
+    const coverImg = document.getElementById("coverImg");
+    const pageTitle = document.getElementById("pageTitle");
+    const pageText = document.getElementById("pageText");
+    const targetDateText = document.getElementById("targetDateText");
+    const countdownText = document.getElementById("countdownText");
+    const tzText = document.getElementById("tzText");
+
+    coverImg.src = COVER_IMAGE_URL;
+    pageTitle.textContent = BOOK_TITLE;
+    pageText.textContent = BOOK_TEXT;
+
+    // Timezone label
+    try{
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      tzText.textContent = "Уақыт белдеуі: " + tz;
+    }catch(e){
+      tzText.textContent = "Уақыт белдеуі: Local";
+    }
+
+    let target = getNextMarch8(new Date());
+
+    function formatTarget(d){
+      // Қазақшаға жуық формат
+      const opts = { year: "numeric", month: "long", day: "2-digit" };
+      return d.toLocaleDateString("kk-KZ", opts);
+    }
+
+    function tick(){
+      const now = new Date();
+      const diff = target.getTime() - now.getTime();
+
+      targetDateText.textContent = formatTarget(target);
+
+      if (diff <= 0){
+        countdownText.textContent = "Қазір! 🎉";
+        return;
+      }
+
+      // есептеу
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / (3600 * 24));
+      const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      countdownText.textContent =
+        `${days} күн ${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
+    }
+
+    let timerId = null;
+
+    function showBook(){
+      hero.style.display = "none";
+      bookSection.style.display = "block";
+      // target жаңартып алайық (батырманы басқан сәтте)
+      target = getNextMarch8(new Date());
+      tick();
+      timerId = setInterval(tick, 1000);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function showHero(){
+      bookSection.style.display = "none";
+      hero.style.display = "grid";
+      if (timerId) clearInterval(timerId);
+      timerId = null;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    nextBtn.addEventListener("click", showBook);
+    backBtn.addEventListener("click", showHero);
+  </script>
+</body>
+</html>
